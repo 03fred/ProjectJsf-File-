@@ -1,0 +1,25 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+      <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+      <h:outputStylesheet name="style.css" library="css" />
+    </h:head>
+    <h:body>
+        <h:form id="form">
+            <h:inputText value="#{arquivoController.arquivo.titulo}"/>
+            <br/>
+            <h:inputTextarea value="#{arquivoController.arquivo.texto}"/> 
+            <br/>
+            <h:selectOneMenu value="#{arquivoController.caixaid}" immediate="true" >  
+                <f:selectItems value="#{arquivoController.mapa}" var="caixa" itemLabel="#{caixa.caixa_id}"
+                               itemValue="#{caixa}"/>  
+            </h:selectOneMenu>
+            <br/>
+            <h:commandButton value="Cadastrar" actionListener="#{arquivoController.cadastra()}" />
+        </h:form>
+    </h:body>
+</html>
+
