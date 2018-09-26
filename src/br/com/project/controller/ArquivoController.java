@@ -1,5 +1,16 @@
 package br.com.project.controller;
 
+import java.io.Serializable;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
+
+import javax.annotation.PostConstruct;
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
+import javax.faces.bean.ViewScoped;
+
+import br.com.projec.mensagem.MensagemBean;
 import br.com.project.documento.PdfService;
 import br.com.project.model.Arquivo;
 import br.com.project.model.Caixa;
@@ -7,14 +18,6 @@ import br.com.project.model.Documento;
 import br.com.project.service.ArquivoService;
 import br.com.project.service.CaixaService;
 import br.com.project.service.DocService;
-import java.io.Serializable;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
-import javax.annotation.PostConstruct;
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ManagedProperty;
-import javax.faces.bean.ViewScoped;
 
 @ViewScoped
 @ManagedBean(name = "arquivoController")
@@ -28,6 +31,8 @@ public class ArquivoController implements Serializable {
     DocService docService;
     @ManagedProperty("#{caixaService}")
     CaixaService caixaService;
+    @ManagedProperty("#{mensagemBean}")
+    private MensagemBean mensagemBean;
     private Documento doc;
     private String docNome;
     private Arquivo arquivoUpdate;
@@ -100,6 +105,9 @@ public class ArquivoController implements Serializable {
         caixa = caixaService.buscaId(caixaid);
         arquivo.setCaixa(caixa);
         arquivoService.cadastrar(arquivo);
+        arquivo = new Arquivo();
+        mensagemBean.cadastradoSucesso();
+
     }
 
     public Integer getCaixaid() {
@@ -110,7 +118,15 @@ public class ArquivoController implements Serializable {
         return mapa;
     }
 
-    public void setMapa(Map<String, Integer> mapa) {
+    public MensagemBean getMensagemBean() {
+		return mensagemBean;
+	}
+
+	public void setMensagemBean(MensagemBean mensagemBean) {
+		this.mensagemBean = mensagemBean;
+	}
+
+	public void setMapa(Map<String, Integer> mapa) {
         this.mapa = mapa;
     }
 
@@ -126,7 +142,10 @@ public class ArquivoController implements Serializable {
         this.listaArquivosPesquisa = listaArquivosPesquisa;
     }
 
-    public Caixa getCaixa() {
+    
+   
+
+	public Caixa getCaixa() {
         return caixa;
     }
 

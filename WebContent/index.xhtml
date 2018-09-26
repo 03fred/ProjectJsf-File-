@@ -1,25 +1,68 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
-    <h:head>
-      <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
-      <h:outputStylesheet name="style.css" library="css" />
-    </h:head>
-    <h:body>
-        <h:form id="form">
-            <h:inputText value="#{arquivoController.arquivo.titulo}"/>
-            <br/>
-            <h:inputTextarea value="#{arquivoController.arquivo.texto}"/> 
-            <br/>
-            <h:selectOneMenu value="#{arquivoController.caixaid}" immediate="true" >  
-                <f:selectItems value="#{arquivoController.mapa}" var="caixa" itemLabel="#{caixa.caixa_id}"
-                               itemValue="#{caixa}"/>  
-            </h:selectOneMenu>
-            <br/>
-            <h:commandButton value="Cadastrar" actionListener="#{arquivoController.cadastra()}" />
-        </h:form>
-    </h:body>
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+	<link href="assets/css/bootstrap.css" rel="stylesheet" />
+	<!-- FontAwesome Styles-->
+	<link href="assets/css/font-awesome.css" rel="stylesheet" />
+	<link href="assets/js/morris/morris-0.4.3.min.css" rel="stylesheet" />
+	<!-- Custom Styles-->
+	<link href="assets/css/custom-styles.css" rel="stylesheet" />
+	<h:outputStylesheet name="style.css" library="css" />
+
+</h:head>
+<h:body class="body">
+	<h:form>
+		<p:growl id="growl" showDetail="true" sticky="true" />
+		<div id="wrapper">
+       <nav class="navbar navbar-default top-navbar" role="navigation">
+               
+                <a class="navbar-brand" href="index.html"><i class="fa fa-archive"></i> ARQUIVOS</a>
+
+           
+                
+        </nav>
+        </div>
+		<div class="row">
+			<div class="col-lg-12">
+				<div class="panel-body">
+					<div class="col-lg-6">
+
+						<h:inputText class="form-control"
+							value="#{arquivoController.arquivo.titulo}">
+							<f:passThroughAttribute name="placeholder"
+								value="TITULO DO ARQUIVO" />
+						</h:inputText>
+
+						<br />
+						<h:inputTextarea class="form-control" rows="8"
+							value="#{arquivoController.arquivo.texto}">
+							<f:passThroughAttribute name="placeholder"
+								value="DIGITE AQUI O CONTEÚDO DO SEU ARQUIVO" />
+						</h:inputTextarea>
+						<br />
+						<h:commandButton class="btn btn-primary" value="Cadastrar"
+							actionListener="#{arquivoController.cadastra()}" />
+					</div>
+
+					<div class="col-lg-6">
+						<div class="form-group">
+							<h:selectOneMenu class="form-control"
+								value="#{arquivoController.caixaid}" immediate="true">
+								<f:selectItems value="#{arquivoController.mapa}" var="caixa"
+									itemLabel="#{caixa.caixa_id}" itemValue="#{caixa}" />
+							</h:selectOneMenu>
+						</div>
+					</div>
+					<br />
+				</div>
+			</div>
+		</div>
+	</h:form>
+</h:body>
 </html>
 
